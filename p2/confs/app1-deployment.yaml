@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+      - name: app1
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: app1-config
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: app1-config
+        configMap:
+          name: app1-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app1-config
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>App 1</title>
+      <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f0f8ff; }
+        h1 { color: #4682B4; }
+      </style>
+    </head>
+    <body>
+      <h1>Welcome to App 1</h1>
+      <p>This is the first application running on K3s.</p>
+    </body>
+    </html>
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-service
+spec:
+  selector:
+    app: app1
+  ports:
+  - port: 80
+    targetPort: 80
