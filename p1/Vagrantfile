@@ -3,7 +3,7 @@ secure_token = `tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 48`.strip
 tab_machines=[
     {
         :name => "jmastoraS-p1",
-        :ip => "192.168.56.110",
+        :ip => "192.168.42.110",
         :cpu => 1,
         :ram => 1024,
         :box => "debian/bookworm64",
@@ -12,7 +12,7 @@ tab_machines=[
     },
     {
         :name => "jmastoraSW-p1",
-        :ip => "192.168.56.111",
+        :ip => "192.168.42.111",
         :cpu => 1,
         :ram => 512,
         :box => "debian/bookworm64",
@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
         config.vm.define machine[:name] do |node|
             node.vm.box = machine[:box]
             node.vm.hostname = machine[:name]
-            node.vm.network "public_network", bridge: "eth0", ip: machine[:ip]
+            node.vm.network "public_network", bridge: "eth1", ip: machine[:ip]
             node.vm.provider "virtualbox" do |v|
                 v.name = machine[:name]
                 v.memory = machine[:ram]
@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|
             node.vm.provision "shell", path: machine[:script], env: {
                 "K3S_TOKEN" => secure_token, 
                 "NODE_TYPE" => machine[:type], 
-                "SERVER_IP" => "192.168.56.110"
+                "SERVER_IP" => "192.168.42.110"
             }
         end
     end

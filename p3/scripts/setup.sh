@@ -1,63 +1,50 @@
 #!/bin/bash
 
-# Install necessary packages
-echo "Installing necessary packages..."
+# install docker for Kali Linux
 apt-get update
-apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 
-# Install Docker
-echo "Installing Docker..."
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+# For Kali Linux, use Docker's Debian repository instead of Ubuntu
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  bullseye stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 apt-get update
-apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# Start Docker service
-systemctl enable docker
-systemctl start docker
+# For Kali Linux, you can use the following packages
+apt-get install -y docker.io
 
-# Add current user to docker group
-usermod -aG docker $USER
-echo "Docker installed successfully!"
+# Alternatively, try installing moby packages if docker.io fails
+if [ $? -ne 0 ]; then
+    apt-get install -y moby-engine moby-cli moby-containerd
+fi
 
-# Install kubectl
-echo "Installing kubectl..."
+# install kubectl
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-chmod +x kubectl
-mv kubectl /usr/local/bin/
-echo "kubectl installed successfully!"
+chmod +x ./kubectl
+mv ./kubectl /usr/local/bin/kubectl
 
-# Install K3d
-echo "Installing K3d..."
-curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
-echo "K3d installed successfully!"
+# install k3d
+wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
 
-# Create K3d cluster
-echo "Creating K3d cluster..."
-k3d cluster create mycluster -p "8081:80@loadbalancer" -p "8889:8889@loadbalancer"
+# create cluster
+k3d cluster create iotcluster -p "8888:30081"
 
-# Install Argo CD
-echo "Installing Argo CD..."
+# create namespaces
 kubectl create namespace argocd
 kubectl create namespace dev
+
+# setup argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-# Wait for Argo CD to be ready
-echo "Waiting for Argo CD to be ready..."
-kubectl wait --for=condition=available --timeout=600s deployment/argocd-server -n argocd
-
-# Port forward Argo CD API server
-echo "Setting up port forwarding for Argo CD..."
-kubectl port-forward svc/argocd-server -n argocd 8081:443 &
-
-# Get the initial password for Argo CD
-echo "Getting the initial password for Argo CD..."
-sleep 10
-ARGOCD_PASSWORD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
-echo "Argo CD initial admin password: $ARGOCD_PASSWORD"
-
-# Apply application configuration
-echo "Applying application configuration..."
-kubectl apply -f ../confs/application.yaml
-
-echo "Setup completed successfully!"
+# Wait for ArgoCD pods to be ready
+echo "Waiting for ArgoCD pods to start..."
+kubectl wait --for=condition=available --timeout=300s deployment/argocd-server -n argocd
