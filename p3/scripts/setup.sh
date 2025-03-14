@@ -48,3 +48,9 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 # Wait for ArgoCD pods to be ready
 echo "Waiting for ArgoCD pods to start..."
 kubectl wait --for=condition=available --timeout=300s deployment/argocd-server -n argocd
+
+# Apply ArgoCD application configuration after ArgoCD is ready
+echo "Applying ArgoCD application configuration..."
+kubectl apply -f deployment.yaml
+
+echo "Setup completed successfully!"
