@@ -1,14 +1,23 @@
+E0323 15:23:34.100174   50438 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"http://localhost:8080/api?timeout=32s\": dial tcp [::1]:8080: connect: connection refused"
+E0323 15:23:34.101520   50438 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"http://localhost:8080/api?timeout=32s\": dial tcp [::1]:8080: connect: connection refused"
+E0323 15:23:34.102843   50438 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"http://localhost:8080/api?timeout=32s\": dial tcp [::1]:8080: connect: connection refused"
+E0323 15:23:34.104220   50438 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"http://localhost:8080/api?timeout=32s\": dial tcp [::1]:8080: connect: connection refused"
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
 Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
 Handling connection for 8080
+E0323 15:25:15.478012   55914 portforward.go:404] "Unhandled Error" err="error copying from local connection to remote stream: writeto tcp4 127.0.0.1:8080->127.0.0.1:49878: read tcp4 127.0.0.1:8080->127.0.0.1:49878: read: connection reset by peer"
 Handling connection for 8080
+E0323 15:25:15.495895   55914 portforward.go:404] "Unhandled Error" err="error copying from local connection to remote stream: writeto tcp4 127.0.0.1:8080->127.0.0.1:49892: read tcp4 127.0.0.1:8080->127.0.0.1:49892: read: connection reset by peer"
 Handling connection for 8080
+E0323 15:25:15.500403   55914 portforward.go:404] "Unhandled Error" err="error copying from local connection to remote stream: writeto tcp4 127.0.0.1:8080->127.0.0.1:49922: read tcp4 127.0.0.1:8080->127.0.0.1:49922: read: connection reset by peer"
 Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
+E0323 15:27:11.279605   55914 portforward.go:391] "Unhandled Error" err="error copying from remote stream to local connection: readfrom tcp4 127.0.0.1:8080->127.0.0.1:49992: write tcp4 127.0.0.1:8080->127.0.0.1:49992: write: broken pipe"
 Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
@@ -21,6 +30,8 @@ Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
+E0323 15:53:31.135694   55914 portforward.go:391] "Unhandled Error" err="error copying from remote stream to local connection: readfrom tcp4 127.0.0.1:8080->127.0.0.1:33332: write tcp4 127.0.0.1:8080->127.0.0.1:33332: write: broken pipe"
+E0323 15:53:31.231024   55914 portforward.go:391] "Unhandled Error" err="error copying from remote stream to local connection: readfrom tcp4 127.0.0.1:8080->127.0.0.1:33402: write tcp4 127.0.0.1:8080->127.0.0.1:33402: write: broken pipe"
 Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
@@ -35,146 +46,10 @@ Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
+E0323 16:01:55.474633   55914 portforward.go:391] "Unhandled Error" err="error copying from remote stream to local connection: readfrom tcp4 127.0.0.1:8080->127.0.0.1:48436: write tcp4 127.0.0.1:8080->127.0.0.1:48436: write: broken pipe"
 Handling connection for 8080
 Handling connection for 8080
 Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-E0314 13:56:05.231133  214309 portforward.go:391] "Unhandled Error" err="error copying from remote stream to local connection: readfrom tcp6 [::1]:8080->[::1]:44164: write tcp6 [::1]:8080->[::1]:44164: write: broken pipe"
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
-Handling connection for 8080
+E0323 16:02:03.727542   55914 portforward.go:391] "Unhandled Error" err="error copying from remote stream to local connection: readfrom tcp4 127.0.0.1:8080->127.0.0.1:48484: write tcp4 127.0.0.1:8080->127.0.0.1:48484: write: broken pipe"
 Handling connection for 8080
 Handling connection for 8080

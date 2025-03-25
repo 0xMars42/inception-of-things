@@ -1,42 +1,40 @@
 secure_token = `tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 48`.strip
-
 tab_machines=[
-    {
-        :name => "jmastoraS-p1",
-        :ip => "192.168.42.110",
-        :cpu => 1,
-        :ram => 1024,
-        :box => "debian/bookworm64",
-        :script => "./scripts/install_k3s_server.sh",
-        :type => "server"
-    },
-    {
-        :name => "jmastoraSW-p1",
-        :ip => "192.168.42.111",
-        :cpu => 1,
-        :ram => 512,
-        :box => "debian/bookworm64",
-        :script => "./scripts/install_k3s_agent.sh",
-        :type => "agent"
-    }
+ {
+ :name => "jmastoraS-p1",
+ :ip => "192.168.56.110", # Changed from 192.168.42.110
+ :cpu => 1,
+ :ram => 1024,
+ :box => "debian/bookworm64",
+ :script => "./scripts/install_k3s_server.sh",
+ :type => "server"
+ },
+ {
+ :name => "jmastoraSW-p1",
+ :ip => "192.168.56.111", # Changed from 192.168.42.111
+ :cpu => 1,
+ :ram => 512,
+ :box => "debian/bookworm64",
+ :script => "./scripts/install_k3s_agent.sh",
+ :type => "agent"
+ }
 ]
-
 Vagrant.configure("2") do |config|
-    tab_machines.each do |machine|
-        config.vm.define machine[:name] do |node|
-            node.vm.box = machine[:box]
-            node.vm.hostname = machine[:name]
-            node.vm.network "public_network", bridge: "eth1", ip: machine[:ip]
-            node.vm.provider "virtualbox" do |v|
-                v.name = machine[:name]
-                v.memory = machine[:ram]
-                v.cpus = machine[:cpu]
-            end
-            node.vm.provision "shell", path: machine[:script], env: {
-                "K3S_TOKEN" => secure_token, 
-                "NODE_TYPE" => machine[:type], 
-                "SERVER_IP" => "192.168.42.110"
-            }
-        end
-    end
+ tab_machines.each do |machine|
+ config.vm.define machine[:name] do |node|
+ node.vm.box = machine[:box]
+ node.vm.hostname = machine[:name]
+ node.vm.network "private_network", ip: machine[:ip]
+ node.vm.provider "virtualbox" do |v|
+ v.name = machine[:name]
+ v.memory = machine[:ram]
+ v.cpus = machine[:cpu]
+end
+node.vm.provision "shell", path: machine[:script], env: {
+  "K3S_TOKEN" => secure_token,
+  "NODE_TYPE" => machine[:type],
+  "SERVER_IP" => "192.168.56.110"
+}
+end
+end
 end
