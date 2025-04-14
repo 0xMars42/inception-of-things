@@ -13,10 +13,10 @@ sudo mv ~/.netrc /root/
 sudo chmod 600 /root/.netrc
 
 # Supprimer d'abord le répertoire git_repo s'il existe déjà
-sudo rm -rf git_repo
+# sudo rm -rf git_repo
 
 # Cloner le dépôt de GitLab
-sudo git clone http://gitlab.jmastora.local/root/git_clc.git git_repo
+sudo git clone http://gitlab.jmastora.local/root/git-clc.git git_repo
 
 # Copier le fichier de déploiement dans le dépôt
 sudo cp confs/deployment.yaml git_repo/

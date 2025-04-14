@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: https://github.com/0xMars42/42iot.git
+    repoURL: http://gitlab.jmastora.local/root/git_clc.git
     path: .
     targetRevision: main
   syncPolicy:
